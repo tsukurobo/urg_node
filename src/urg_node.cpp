@@ -33,6 +33,7 @@
 
 #include "urg_node/urg_node.hpp"
 
+#include <csignal>
 #include <memory>
 #include <string>
 #include <vector>
@@ -73,6 +74,8 @@ UrgNode::UrgNode(const rclcpp::NodeOptions & node_options)
   laser_frame_id_("laser"),
   service_yield_(true)
 {
+  std::signal(SIGPIPE, SIG_IGN);
+
   (void) synchronize_time_;
   initSetup();
 }
